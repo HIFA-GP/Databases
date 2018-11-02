@@ -1,5 +1,5 @@
 ##creating a database by sqlalchemy - sqlite 
-from sqlalchemy import create_engine , Column , Integer , String , ForeignKey
+from sqlalchemy import create_engine , Column , Integer , String , ForeignKey , Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -14,6 +14,7 @@ class User(Base):
     username = Column('username',String , unique=True)
     password = Column('password' , String)		##[Asmer] password doesn't have to be unique
     email = Column('email' , String , unique=True)
+    location = Column('location' , String)
     googleassist = Column('googleassist' , String)	##[Asmer] user_id include alphabetic characters	
     alexa = Column('alexa',String) ##[Asmer] user_id include alphabetic characters	
 ##    for one-to many relation with room table
@@ -37,6 +38,7 @@ class Device(Base):
     __tablename__ = "device"
     id = Column('id' , Integer , primary_key=True)
     name = Column('name' , String)
+    status = Column('status' , Boolean)
     room_id = Column(Integer , ForeignKey('room.id'))
 ##    to specify the device table as a parent in the inheritence
     type = Column(String)
